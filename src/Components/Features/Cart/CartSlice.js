@@ -21,6 +21,8 @@ const initialState = {
     amount:4,
     total:0,
     enteredCupon:"",
+    priceAfterSale:0,
+    itemOnSale:"",
     coupons : Coupon,
     savings:0,
     isLoading:false,
@@ -41,18 +43,28 @@ const initialState = {
             )];
             state.cartItems = state.cartItems.filter(item => item.id !== itemId
             );
-            state.amount -= 1;
-            state.total -= deletedItem[0].price; 
+            state.amount -= deletedItem[0].amount;
+            // let x = deletedItem[0].price * deletedItem[0].amount;
+            state.total -= deletedItem[0].price * deletedItem[0].amount; 
             
         },
         toggleAmount : (state,{payload})=>{
             console.log(payload);
             const itemsId = payload.id;
             const item = state.cartItems.find(item => item.id === itemsId);
-            if(payload.isClicked) item.amount += 1;
-            else item.amount -= 1
-            state.amount = state.cartItems.reduce((acc,val) => acc + val.amount ,0.0)
-            state.total += parseFloat(item.price);
+            console.log(item.price);
+            
+            if(payload.isClicked) {
+                item.amount += 1;
+                state.amount = state.cartItems.reduce((acc,val) => acc + val.amount ,0.0)
+                state.total += parseFloat(item.price);
+            }
+            else {
+                item.amount -= 1
+                state.amount = state.cartItems.reduce((acc,val) => acc + val.amount ,0.0)
+                state.total -= parseFloat(item.price);
+            }
+           
 
         },
        totalPrice : (state)=>{
@@ -61,12 +73,56 @@ const initialState = {
        },
        getCoupon:(state,{payload})=>{
         state.enteredCupon = payload;
-        
        },
        calcPriceAfterSale :(state)=>{
         const matchedCupon = state.coupons.find(item => item.name === state.enteredCupon)
+        console.log(matchedCupon);
+        
+        if (matchedCupon) {
+            // console.log(matchedCupon);
+            // if (matchedCupon.targetProductId) {
+            //     console.log("lkdn");
+                
+            // }else{
+            //     console.log("fadya");
+                
+            // }
+            // try {
+            //     if (matchedCupon.targetProductId) {
+            //             console.log("lkdn");
+                        
+            //     }
+            // } catch (error) {
+            //     console.log("fds");
+                
+            // }
+            console.log(matchedCupon.targetProductId);
+            if (matchedCupon.targetProductId) {
+                const prod = state.cartItems.filter(item => item.id === matchedCupon.targetProductId)
+                console.log(prod[0].price);
+                console.log(matchedCupon.percentage);
+                state.itemOnSale = prod[0].id;
+                console.log(state.itemOnSale);
+                state.priceAfterSale = prod[0].price - ((matchedCupon.percentage/100) * prod[0].price);
+                console.log(state.priceAfterSale);
+            }else{
+               
+            }
+            
+            console.log("gfds");
+            
+        }else{
+            console.log("sah");
+            
+        }
         if (matchedCupon) {
            console.log(matchedCupon.percentage);
+           if (matchedCupon.targetProductId ){
+           const prod =  state.cartItems.filter(item => item.id === matchedCupon[0].targetProductId );
+           console.log(prod);
+           
+           }
+           
            state.savings =Math.ceil( ( matchedCupon.percentage/100) * state.total) ;
            
         }else{

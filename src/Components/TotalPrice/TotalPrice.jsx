@@ -35,7 +35,7 @@ export default function TotalPrice() {
   
               <dl className="flex items-center justify-between gap-4 border-t border-gray-200 pt-2 dark:border-gray-700">
                 <dt className="text-base font-bold text-gray-900 dark:text-white">Total</dt>
-                <dd className="text-base font-bold text-gray-900 dark:text-white">${total - savings + 60 }</dd>
+                <dd className="text-base font-bold text-gray-900 dark:text-white">${(total - savings + 60).toFixed(2) }</dd>
               </dl>
             </div>
   

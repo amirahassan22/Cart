@@ -30,9 +30,9 @@
 //     ]
     export const Coupon = [ 
         {id:1,name:'a123',percentage: 10},
-        {id:2,name:'b123',percentage: 20},
-        {id:3,name:'c123',percentage: 5},
-        {id:4,name:'amira189',percentage: 10},
-        {id:5,name:'lena125',percentage: 15},
+        {id:2,name:'b123',percentage: 20,targetProductId:"rec1JZlfCIBOPdcT2"},
+        {id:3,name:'c123',percentage: 5,targetProductId:"recB6qcHPxb62YJ75"},
+        {id:4,name:'amira189',percentage: 10,targetProductId:"recdRxBsE14Rr2VuJ"},
+        {id:5,name:'lena125',percentage: 15,targetProductId:"recwTo160XST3PIoW"},
     ] 
     export default Coupon;

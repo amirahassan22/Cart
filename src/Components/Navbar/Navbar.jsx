@@ -22,7 +22,7 @@ export default function Navbar() {
         {/* <img src="https://flowbite.com/docs/images/logo.svg" className="h-8" alt="Flowbite Logo" /> */}
         <span className="text-white self-center text-2xl font-semibold whitespace-nowrap">Redux</span>
     </a>
-    <div className="relative w-full md:block md:w-auto" id="navbar-default">
+    <div className="relative md:block md:w-auto" id="navbar-default">
         <a className="text-white hover:text-green-400">
         <CartIcon/>
         </a>
